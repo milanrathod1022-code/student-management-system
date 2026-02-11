@@ -325,7 +325,11 @@ All endpoints return error responses in the following format:
 - Email uniqueness constraint
 - Helmet.js for security headers
 - CORS configuration to prevent unauthorized access
+- Rate limiting (100 requests per 15 minutes per IP)
 - Environment variables for sensitive data
+- Updated dependencies to patch known vulnerabilities
+- Protection against prototype pollution
+- Protection against NoSQL injection attacks
 
 ## 🧪 Testing
 
