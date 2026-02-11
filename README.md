@@ -44,12 +44,13 @@ A comprehensive full-stack web application for managing student profiles with au
 ### Backend
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - ODM for MongoDB
-- **JWT** - Authentication
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB ODM (v7+)
+- **JWT** - JSON Web Tokens for authentication
 - **bcryptjs** - Password hashing
-- **Multer** - File upload handling
+- **Multer v2** - File upload handling
 - **Express Validator** - Request validation
+- **Express Rate Limit** - Rate limiting middleware
 
 ## 📁 Project Structure
 
@@ -284,14 +285,42 @@ After registration, you can:
 
 ## 🔒 Security Features
 
-- Password hashing with bcrypt (10 salt rounds)
-- JWT token-based authentication
-- Protected API routes with middleware
-- Input validation on both client and server
-- CORS configuration
-- Secure file upload handling
-- XSS protection
-- MongoDB injection prevention
+- **Password Security**
+  - Password hashing with bcrypt (10 salt rounds)
+  - Minimum password length enforcement
+  - Secure password comparison
+
+- **Authentication & Authorization**
+  - JWT token-based authentication
+  - Token expiration (30 days)
+  - Protected API routes with middleware
+  - Automatic token validation
+
+- **Rate Limiting**
+  - Login attempts: 5 per 15 minutes per IP
+  - Registration attempts: 5 per 15 minutes per IP
+  - API requests: 100 per 15 minutes per IP
+  - Protection against brute force attacks
+
+- **Input Validation & Sanitization**
+  - Server-side validation using express-validator
+  - Client-side form validation
+  - Email format validation (ReDoS-safe regex)
+  - File upload validation (type, size, extension)
+
+- **File Upload Security**
+  - File type whitelist (images only)
+  - File size limit (5MB)
+  - Sanitized filenames
+  - Extension validation
+
+- **Additional Security Measures**
+  - CORS configuration
+  - XSS protection through input sanitization
+  - MongoDB injection prevention
+  - Secure error handling (no sensitive data exposure)
+  - Graceful shutdown handling
+  - Environment-based configuration
 
 ## 📱 Responsive Design
 
