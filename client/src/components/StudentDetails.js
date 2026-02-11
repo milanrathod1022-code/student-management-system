@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import * as studentService from '../services/studentService';
 
 function StudentDetails({ studentId, onBack, onEdit }) {
@@ -6,11 +6,7 @@ function StudentDetails({ studentId, onBack, onEdit }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchStudent();
-  }, [studentId]);
-
-  const fetchStudent = async () => {
+  const fetchStudent = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -21,7 +17,11 @@ function StudentDetails({ studentId, onBack, onEdit }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [studentId]);
+
+  useEffect(() => {
+    fetchStudent();
+  }, [fetchStudent]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./config/db');
 const studentRoutes = require('./routes/studentRoutes');
 
@@ -9,6 +10,18 @@ const app = express();
 
 // Connect to MongoDB
 connectDB();
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Apply rate limiter to all requests
+app.use(limiter);
 
 // Middleware
 app.use(helmet()); // Security headers
