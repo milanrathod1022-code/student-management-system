@@ -16,7 +16,15 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, `${req.user.id}-${Date.now()}${path.extname(file.originalname)}`);
+    // Sanitize filename and ensure safe extension
+    const ext = path.extname(file.originalname).toLowerCase();
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+    
+    if (!allowedExtensions.includes(ext)) {
+      return cb(new Error('Invalid file extension'));
+    }
+    
+    cb(null, `${req.user.id}-${Date.now()}${ext}`);
   }
 });
 

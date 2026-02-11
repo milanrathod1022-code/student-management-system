@@ -55,8 +55,8 @@ const Signup = () => {
     setLoading(true);
     try {
       await AuthService.signup({ name, email, password });
-      toast.success('Registration successful! Please login.');
-      navigate('/login');
+      toast.success('Registration successful! Redirecting to dashboard...');
+      navigate('/dashboard');
     } catch (error) {
       toast.error(error.message || 'Registration failed');
     } finally {

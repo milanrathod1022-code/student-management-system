@@ -56,7 +56,17 @@ const server = app.listen(PORT, () => {
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
   console.log(`Error: ${err.message}`);
-  server.close(() => process.exit(1));
+  // Close server & exit process
+  server.close(() => {
+    console.log('Server closed due to unhandled promise rejection');
+    process.exit(1);
+  });
+  
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error('Forcing shutdown after timeout');
+    process.exit(1);
+  }, 10000);
 });
 
 module.exports = app;
