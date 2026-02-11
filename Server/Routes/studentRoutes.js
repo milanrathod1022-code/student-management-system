@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const { protect } = require('../Middleware/auth');
+const { apiLimiter } = require('../Middleware/rateLimiter');
 const {
   getProfile,
   updatePersonalDetails,
@@ -44,9 +45,9 @@ const upload = multer({
   }
 });
 
-router.get('/profile', protect, getProfile);
-router.put('/personal', protect, updatePersonalDetails);
-router.put('/academic', protect, updateAcademicDetails);
-router.post('/profile-picture', protect, upload.single('profilePicture'), uploadProfilePicture);
+router.get('/profile', protect, apiLimiter, getProfile);
+router.put('/personal', protect, apiLimiter, updatePersonalDetails);
+router.put('/academic', protect, apiLimiter, updateAcademicDetails);
+router.post('/profile-picture', protect, apiLimiter, upload.single('profilePicture'), uploadProfilePicture);
 
 module.exports = router;

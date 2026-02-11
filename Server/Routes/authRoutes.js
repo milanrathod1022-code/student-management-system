@@ -3,6 +3,7 @@ const router = express.Router();
 const { body } = require('express-validator');
 const { validate } = require('../Middleware/validator');
 const { protect } = require('../Middleware/auth');
+const { authLimiter, loginLimiter } = require('../Middleware/rateLimiter');
 const {
   register,
   login,
@@ -25,8 +26,8 @@ const loginValidation = [
   body('password').notEmpty().withMessage('Password is required')
 ];
 
-router.post('/register', registerValidation, validate, register);
-router.post('/login', loginValidation, validate, login);
+router.post('/register', authLimiter, registerValidation, validate, register);
+router.post('/login', loginLimiter, loginValidation, validate, login);
 router.post('/logout', protect, logout);
 router.get('/me', protect, getCurrentUser);
 
