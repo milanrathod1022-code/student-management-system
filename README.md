@@ -134,6 +134,16 @@ npm start
 
 The React app will start on `http://localhost:3000`
 
+4. **(Optional) Seed Sample Data**
+
+To populate the database with sample student data for testing:
+```bash
+cd server
+npm run seed
+```
+
+This will create 8 sample students with different courses and statuses.
+
 ## 📡 API Documentation
 
 ### Base URL
@@ -332,6 +342,8 @@ All endpoints return error responses in the following format:
 - Protection against NoSQL injection attacks
 
 ## 🧪 Testing
+
+For detailed testing instructions and test cases, see [TESTING.md](TESTING.md).
 
 To test the API endpoints, you can use tools like:
 - Postman
