@@ -1,0 +1,37 @@
+{
+  "name": "student-profile-management",
+  "version": "1.0.0",
+  "description": "Student Profile Management System with Authentication",
+  "main": "Server/Server.js",
+  "scripts": {
+    "start": "node Server/Server.js",
+    "server": "nodemon Server/Server.js",
+    "client": "cd Client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd Client && npm install"
+  },
+  "keywords": [
+    "student",
+    "management",
+    "authentication",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express-validator": "^7.0.1",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "concurrently": "^8.0.1"
+  }
+}
